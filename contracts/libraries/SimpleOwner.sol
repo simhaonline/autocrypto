@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GNU GPL-3.0-or-later
 pragma solidity 0.8.10;
 
-import "./IERC20.sol";
+import "../interfaces/IERC20.sol";
 
 // Simple Owner defines a contract with single owner that cannot be changed
 // this contract can receive funds and has the ability to transfer funds to the owners address only

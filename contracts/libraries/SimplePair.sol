@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GNU GPL-3.0-or-later
 pragma solidity 0.8.10;
 
-import "./IPancakePair.sol";
-import "./IERC20.sol";
-import "./IWBNB.sol";
+import "../interfaces/IPancakePair.sol";
+import "../interfaces/IERC20.sol";
+import "../interfaces/IWBNB.sol";
 
 library SimplePair {
     IWBNB constant WBNB = IWBNB(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
