@@ -1,7 +1,7 @@
 # AutoCrypto
 Your companion tool to automate the buy/sell of cryptocurrencies in **decentralized** exchanges on **Binance Smart Chain**.
 
-## How AutoBuy Works ?
+## How AutoCrypto Works ?
 AutoCrypto deploys a custom smart contract **for you**, allowing the easy buy and sell on exchanges such as [PancakeSwap](https://pancakeswap.finance/). After deploying the contract, autocrypto will monitor the price in the **asset pair** _(ex: BNBxBUSD )_ defined until the desired buy or sell ranges are reached, when this happens a automated order will be placed using your previously deployed contract. 
 
 _for more details about the deployed smart contract check the [**AutoCrypto.sol contract**](./contracts/AutoCrypto.sol)_
