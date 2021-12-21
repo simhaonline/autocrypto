@@ -1,0 +1,4 @@
+test_only: true
+check_interval: 30
+monitored_pairs: ["BNB/BUSD", "CAKE/BUSD"]
+autocrypto_contract: "address of the deployed autocrypto contract"
