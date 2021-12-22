@@ -1,0 +1,6 @@
+real_trades: true
+check_interval: 30
+monitored_pairs: ["BNB/BUSD", "CAKE/BUSD"]
+autocrypto_contract: "address of the deployed autocrypto contract"
+websocket_endpoint: wss://bsc-ws-node.nariox.org:443
+rpc_url: https://bsc-dataseed1.ninicoin.io/
