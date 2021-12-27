@@ -3,7 +3,7 @@ from web3.contract import Contract
 from web3 import Web3
 import os
 
-class AutoCryptoContract(Contract):
+class AutoContract(Contract):
     def __init__(self, bytecode, abi, web3Conn: Web3, address: str = None):
         if web3Conn is None or web3Conn.isConnected() is False:
             raise ValueError("a working web3 connection is required")
@@ -14,7 +14,7 @@ class AutoCryptoContract(Contract):
         self.web3 = web3Conn
         self.abi = abi
         self.bytecode = bytecode 
-        super(AutoCryptoContract, self).__init__(address)
+        super(AutoContract, self).__init__(address)
         
     def _deploy(self, web3, bytecode, abi) -> str:
         """Deploy te contract to the blockchain (if it is not already deployed)"""
@@ -24,13 +24,10 @@ class AutoCryptoContract(Contract):
         tx_hash = contract.constructor().transact()
         return web3.eth.wait_for_transaction_receipt(tx_hash).contractAddress
 
-def autocrypto_contract() -> Contract:
+def autocrypto_contract(web3: Web3) -> Contract:
     """return a instance of the Contract class containing the compiled autocrypto contract data"""
-    web3 = Web3(Web3.HTTPProvider("http://localhost:8545")) #TODO: take the rpc url from the config file
-    web3.eth.defaultAccount = web3.eth.accounts[0] #TODO: get the encrypted private key from the config file
-    
     compiled_data = _compile_autocrypto()['AutoCrypto']
-    return AutoCryptoContract(compiled_data['deployedBytecode'], compiled_data['abi'], web3)
+    return AutoContract(compiled_data['bytecode'], compiled_data['abi'], web3)
 
 def _compile_autocrypto() -> dict:
     """compile autocrypto using all solidity files in the contracts directory"""
@@ -55,6 +52,8 @@ def _contract_code(contract_path: str) -> str:
         return f.read()
 
 if __name__ == "__main__":
-    autocrypto = autocrypto_contract()
-    
-    
+    web3 = Web3(Web3.HTTPProvider("http://localhost:8545")) #TODO: take the rpc url from the config file
+    web3.eth.defaultAccount = web3.eth.accounts[0] #TODO: get the encrypted private key from the config file
+
+    autocrypto = autocrypto_contract(web3)
+    print(autocrypto.functions.number().call())    

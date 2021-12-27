@@ -25,4 +25,8 @@ contract AutoCrypto is SimpleOwner{
         require(pair.isOnPair(inToken), "!isOnPair");
         amountOut = pair.simpleSwap(inToken, amount);
     }
+
+    function number() external pure returns(uint){
+        return 1;
+    }
 }

@@ -8,3 +8,6 @@ _for more details about the deployed smart contract check the [**AutoCrypto.sol 
 
 ## Why deploy a custom contract ?
 Direct interaction with famous contracts from centralized exchanges are prone to [**front running**](https://cybernews.com/crypto/flash-boys-2-0-front-runners-draining-280-million-per-month-from-crypto-transactions/), deploying your own custom solution helps to mitigate this problem.
+
+## Usage
+AutoCrypto can be accessed via a **user interface (GUI)** or **command line**, to enable the graphical interface set the parameter `gui_mode` to `true` in the configuration file `auto_config.yaml` on the project root directory.
