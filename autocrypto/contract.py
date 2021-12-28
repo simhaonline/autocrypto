@@ -1,6 +1,7 @@
 from brownie.project import compiler
 from web3.contract import Contract
 from web3 import Web3
+import provider 
 import os
 
 class AutoContract(Contract):
@@ -33,7 +34,7 @@ def _compile_autocrypto() -> dict:
     """compile autocrypto using all solidity files in the contracts directory"""
     contracts_path = _get_contracts_path("../contracts")
     contract_data = {path : _contract_code(path) for path in contracts_path}
-    return compiler.compile_and_format(contract_sources=contract_data)
+    return compiler.compile_and_format(contract_sources=contract_data) #TODO: can we replace brownie here with solcx ? https://web3py.readthedocs.io/en/stable/examples.html#looking-up-blocks
 
 def _get_contracts_path(root_path: str) -> list:
     """return a list of solidity files in the root_path directory provided"""
@@ -52,8 +53,9 @@ def _contract_code(contract_path: str) -> str:
         return f.read()
 
 if __name__ == "__main__":
-    web3 = Web3(Web3.HTTPProvider("http://localhost:8545")) #TODO: take the rpc url from the config file
-    web3.eth.defaultAccount = web3.eth.accounts[0] #TODO: get the encrypted private key from the config file
-
+    web3 = provider.web3_connection()
+    web3.eth.sendTransaction({'from': web3.eth.accounts[0], 'to': provider.active_account, 'value': web3.toWei(2, 'ether')})
+    print(f"transferred 1 ether from {web3.eth.accounts[0]} to {provider.active_account}")
+    print(f"balance of {provider.active_account} is {web3.fromWei(web3.eth.getBalance(provider.active_account), 'ether')} ether")
     autocrypto = autocrypto_contract(web3)
     print(autocrypto.functions.number().call())    
